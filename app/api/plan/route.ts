@@ -61,7 +61,7 @@ Create a comprehensive 30-day plan that:
 Make the plan realistic, encouraging, and grounded in small, sustainable changes.`
 
     const { object } = await generateObject({
-      model: "openai/gpt-5",
+      model: "gpt-5",
       schema: planSchema,
       prompt,
       maxOutputTokens: 4000,

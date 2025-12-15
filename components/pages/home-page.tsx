@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import Link from "next/link"
 import { LanguageSelector } from "@/components/language-selector"
+import { useLanguage } from "@/lib/language-context"
 import {
   Sparkles,
   Brain,
@@ -21,6 +22,8 @@ import {
 } from "lucide-react"
 
 export default function HomePage({ onStartAssessment }: { onStartAssessment: () => void }) {
+  const { t } = useLanguage()
+
   return (
     <div className="min-h-screen">
       <nav className="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border/50">
@@ -32,13 +35,13 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
 
           <div className="hidden md:flex items-center gap-8">
             <a href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Features
+              {t("nav_features")}
             </a>
             <a href="#how-it-works" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              How It Works
+              {t("nav_how_it_works")}
             </a>
             <a href="#testimonials" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-              Testimonials
+              {t("nav_testimonials")}
             </a>
           </div>
 
@@ -46,12 +49,12 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
             <LanguageSelector />
             <Link href="/auth/login">
               <Button variant="ghost" size="sm">
-                Sign In
+                {t("nav_sign_in")}
               </Button>
             </Link>
             <Link href="/auth/sign-up">
               <Button size="sm" className="rounded-full">
-                Get Started
+                {t("nav_get_started")}
               </Button>
             </Link>
           </div>
@@ -64,16 +67,15 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
         <div className="max-w-6xl mx-auto text-center">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
             <Sparkles className="w-4 h-4" />
-            AI-Powered Life Transformation
+            {t("hero_badge")}
           </div>
 
           <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance leading-tight">
-            Transform your life in <span className="text-primary">30 days</span>
+            {t("hero_title_1")} <span className="text-primary">{t("hero_title_2")}</span>
           </h1>
 
           <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto text-pretty leading-relaxed">
-            Get personalized AI-powered insights, a custom transformation plan, and daily guidance to achieve your goals
-            and build lasting positive habits.
+            {t("hero_description")}
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
@@ -82,19 +84,17 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               size="lg"
               className="px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-shadow"
             >
-              Start Free Assessment
+              {t("hero_cta_primary")}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Link href="/dashboard">
               <Button variant="outline" size="lg" className="px-8 py-6 text-lg rounded-full bg-transparent">
-                Explore Dashboard
+                {t("hero_cta_secondary")}
               </Button>
             </Link>
           </div>
 
-          <div className="mt-12 text-sm text-muted-foreground">
-            No credit card required · 5 min assessment · Instant results
-          </div>
+          <div className="mt-12 text-sm text-muted-foreground">{t("hero_disclaimer")}</div>
         </div>
       </section>
 
@@ -103,19 +103,19 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             <div className="text-center">
               <div className="text-4xl font-bold text-primary mb-2">10k+</div>
-              <div className="text-sm text-muted-foreground">Lives Transformed</div>
+              <div className="text-sm text-muted-foreground">{t("stats_transformed")}</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-primary mb-2">94%</div>
-              <div className="text-sm text-muted-foreground">Success Rate</div>
+              <div className="text-sm text-muted-foreground">{t("stats_success")}</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-primary mb-2">4.9★</div>
-              <div className="text-sm text-muted-foreground">User Rating</div>
+              <div className="text-sm text-muted-foreground">{t("stats_rating")}</div>
             </div>
             <div className="text-center">
               <div className="text-4xl font-bold text-primary mb-2">8</div>
-              <div className="text-sm text-muted-foreground">Languages</div>
+              <div className="text-sm text-muted-foreground">{t("stats_languages")}</div>
             </div>
           </div>
         </div>
@@ -124,10 +124,8 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
       <section id="features" className="px-4 py-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Everything you need to transform</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Powerful AI-driven features designed to support your journey every step of the way
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">{t("features_title")}</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">{t("features_subtitle")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -135,13 +133,10 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Brain className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-3">AI Life Analysis</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Deep insights into your challenges, emotional patterns, strengths, and growth opportunities through
-                advanced AI analysis.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t("feature_analysis_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">{t("feature_analysis_desc")}</p>
               <div className="flex items-center text-sm text-primary font-medium">
-                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                {t("learn_more")} <ArrowRight className="ml-1 w-4 h-4" />
               </div>
             </Card>
 
@@ -149,13 +144,10 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-4">
                 <Calendar className="w-6 h-6 text-secondary" />
               </div>
-              <h3 className="text-xl font-bold mb-3">30-Day Transformation Plan</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Personalized week-by-week roadmap with daily tasks, habit building, and motivational guidance tailored
-                to your goals.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t("feature_plan_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">{t("feature_plan_desc")}</p>
               <div className="flex items-center text-sm text-primary font-medium">
-                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                {t("learn_more")} <ArrowRight className="ml-1 w-4 h-4" />
               </div>
             </Card>
 
@@ -163,13 +155,10 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                 <MessageCircle className="w-6 h-6 text-accent" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Daily AI Companion</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Get bite-sized micro-goals, 5-minute actions, motivation boosts, and reflection prompts every single
-                day.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t("feature_companion_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">{t("feature_companion_desc")}</p>
               <div className="flex items-center text-sm text-primary font-medium">
-                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                {t("learn_more")} <ArrowRight className="ml-1 w-4 h-4" />
               </div>
             </Card>
 
@@ -177,13 +166,10 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <Mic className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Voice Input</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Express yourself naturally with voice recording and automatic transcription for deeper, more authentic
-                insights.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t("feature_voice_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">{t("feature_voice_desc")}</p>
               <div className="flex items-center text-sm text-primary font-medium">
-                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                {t("learn_more")} <ArrowRight className="ml-1 w-4 h-4" />
               </div>
             </Card>
 
@@ -191,13 +177,10 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-4">
                 <BookOpen className="w-6 h-6 text-secondary" />
               </div>
-              <h3 className="text-xl font-bold mb-3">AI Journal Insights</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Discover emotional patterns, gain perspective, and receive personalized advice from your journal
-                entries.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t("feature_journal_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">{t("feature_journal_desc")}</p>
               <div className="flex items-center text-sm text-primary font-medium">
-                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                {t("learn_more")} <ArrowRight className="ml-1 w-4 h-4" />
               </div>
             </Card>
 
@@ -205,12 +188,10 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                 <Heart className="w-6 h-6 text-accent" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Future Self Chat</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Talk to your wiser future self for guidance, perspective, and motivation when you need it most.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t("feature_future_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">{t("feature_future_desc")}</p>
               <div className="flex items-center text-sm text-primary font-medium">
-                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                {t("learn_more")} <ArrowRight className="ml-1 w-4 h-4" />
               </div>
             </Card>
 
@@ -218,12 +199,10 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center mb-4">
                 <BarChart className="w-6 h-6 text-primary" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Progress Tracking</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Visualize your journey with daily completion tracking, notes, and progress analytics to stay motivated.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t("feature_progress_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">{t("feature_progress_desc")}</p>
               <div className="flex items-center text-sm text-primary font-medium">
-                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                {t("learn_more")} <ArrowRight className="ml-1 w-4 h-4" />
               </div>
             </Card>
 
@@ -231,12 +210,10 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-12 h-12 bg-secondary/10 rounded-lg flex items-center justify-center mb-4">
                 <Download className="w-6 h-6 text-secondary" />
               </div>
-              <h3 className="text-xl font-bold mb-3">PDF Export</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Download your complete 30-day plan as a beautiful PDF to print, share, or keep offline.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t("feature_pdf_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">{t("feature_pdf_desc")}</p>
               <div className="flex items-center text-sm text-primary font-medium">
-                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                {t("learn_more")} <ArrowRight className="ml-1 w-4 h-4" />
               </div>
             </Card>
 
@@ -244,12 +221,10 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
                 <Globe className="w-6 h-6 text-accent" />
               </div>
-              <h3 className="text-xl font-bold mb-3">Multi-Language Support</h3>
-              <p className="text-muted-foreground leading-relaxed mb-4">
-                Access LifePath AI in 8 languages: English, French, Spanish, Arabic, Swahili, Igbo, Yoruba, and Hausa.
-              </p>
+              <h3 className="text-xl font-bold mb-3">{t("feature_multilang_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed mb-4">{t("feature_multilang_desc")}</p>
               <div className="flex items-center text-sm text-primary font-medium">
-                Learn more <ArrowRight className="ml-1 w-4 h-4" />
+                {t("learn_more")} <ArrowRight className="ml-1 w-4 h-4" />
               </div>
             </Card>
           </div>
@@ -259,10 +234,8 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
       <section id="how-it-works" className="px-4 py-20 bg-muted/30">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Your transformation in 3 steps</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Simple, powerful, and designed to create lasting change
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">{t("how_title")}</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">{t("how_subtitle")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -270,39 +243,30 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-2xl font-bold text-primary-foreground mx-auto mb-6">
                 1
               </div>
-              <h3 className="text-2xl font-bold mb-4">Take the Assessment</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Complete our 5-step life assessment form in just 5 minutes. Use voice input or typing to share your
-                challenges and goals.
-              </p>
+              <h3 className="text-2xl font-bold mb-4">{t("how_step1_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed">{t("how_step1_desc")}</p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-secondary rounded-full flex items-center justify-center text-2xl font-bold text-secondary-foreground mx-auto mb-6">
                 2
               </div>
-              <h3 className="text-2xl font-bold mb-4">Get Your Plan</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Receive instant AI-powered analysis and a personalized 30-day transformation plan tailored to your
-                unique situation.
-              </p>
+              <h3 className="text-2xl font-bold mb-4">{t("how_step2_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed">{t("how_step2_desc")}</p>
             </div>
 
             <div className="text-center">
               <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center text-2xl font-bold text-accent-foreground mx-auto mb-6">
                 3
               </div>
-              <h3 className="text-2xl font-bold mb-4">Transform Daily</h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Follow your plan with daily AI guidance, track progress, journal insights, and chat with your future
-                self for support.
-              </p>
+              <h3 className="text-2xl font-bold mb-4">{t("how_step3_title")}</h3>
+              <p className="text-muted-foreground leading-relaxed">{t("how_step3_desc")}</p>
             </div>
           </div>
 
           <div className="text-center mt-12">
             <Button onClick={onStartAssessment} size="lg" className="px-8 py-6 text-lg rounded-full">
-              Start Your Transformation
+              {t("hero_cta_primary")}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
           </div>
@@ -312,10 +276,8 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
       <section id="testimonials" className="px-4 py-20">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">Trusted by thousands</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
-              Real stories from people who transformed their lives with LifePath AI
-            </p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-balance">{t("testimonials_title")}</h2>
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">{t("testimonials_subtitle")}</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -387,20 +349,17 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
 
       <section className="px-4 py-20 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance">Ready to transform your life?</h2>
-          <p className="text-xl text-muted-foreground mb-12 text-pretty">
-            Join thousands who have already started their journey to a better life. Get your personalized plan in
-            minutes.
-          </p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-balance">{t("cta_title")}</h2>
+          <p className="text-xl text-muted-foreground mb-12 text-pretty">{t("cta_subtitle")}</p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
             <Button onClick={onStartAssessment} size="lg" className="px-8 py-6 text-lg rounded-full shadow-lg">
-              Start Free Assessment
+              {t("hero_cta_primary")}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
             <Link href="/dashboard">
               <Button variant="outline" size="lg" className="px-8 py-6 text-lg rounded-full bg-transparent">
-                View Demo
+                {t("cta_demo")}
               </Button>
             </Link>
           </div>
@@ -408,14 +367,15 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
           <div className="flex items-center justify-center gap-6 text-sm text-muted-foreground">
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-primary" />
-              No credit card
-            </div>
-            <div className="flex items-center gap-2">
-              <CheckCircle className="w-4 h-4 text-primary" />5 min assessment
+              {t("cta_no_card")}
             </div>
             <div className="flex items-center gap-2">
               <CheckCircle className="w-4 h-4 text-primary" />
-              Instant results
+              {t("cta_time")}
+            </div>
+            <div className="flex items-center gap-2">
+              <CheckCircle className="w-4 h-4 text-primary" />
+              {t("cta_instant")}
             </div>
           </div>
         </div>
@@ -439,12 +399,12 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="space-y-2 text-sm text-muted-foreground">
                 <div>
                   <a href="#features" className="hover:text-foreground transition-colors">
-                    Features
+                    {t("nav_features")}
                   </a>
                 </div>
                 <div>
                   <a href="#how-it-works" className="hover:text-foreground transition-colors">
-                    How It Works
+                    {t("nav_how_it_works")}
                   </a>
                 </div>
                 <div>
@@ -481,12 +441,12 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
               <div className="space-y-2 text-sm text-muted-foreground">
                 <div>
                   <Link href="/auth/login" className="hover:text-foreground transition-colors">
-                    Sign In
+                    {t("nav_sign_in")}
                   </Link>
                 </div>
                 <div>
                   <Link href="/auth/sign-up" className="hover:text-foreground transition-colors">
-                    Sign Up
+                    {t("nav_get_started")}
                   </Link>
                 </div>
               </div>

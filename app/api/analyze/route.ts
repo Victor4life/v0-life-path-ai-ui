@@ -51,7 +51,7 @@ Provide a thorough, gentle analysis that:
 Be encouraging, supportive, and realistic. Focus on their potential for growth.`
 
     const { object } = await generateObject({
-      model: "openai/gpt-5",
+      model: "gpt-5",
       schema: analysisSchema,
       prompt,
       maxOutputTokens: 3000,

@@ -43,7 +43,7 @@ Provide today's guidance with:
 Keep it concise, actionable, and uplifting. Focus on today only.`
 
     const { object } = await generateObject({
-      model: "openai/gpt-5",
+      model: "gpt-5",
       schema: dailySchema,
       prompt,
       maxOutputTokens: 800,
