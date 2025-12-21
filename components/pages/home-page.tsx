@@ -1,8 +1,9 @@
 "use client"
 
+import { useState } from "react"
+import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
-import Link from "next/link"
 import { LanguageSelector } from "@/components/language-selector"
 import { useLanguage } from "@/lib/language-context"
 import {
@@ -19,10 +20,13 @@ import {
   Download,
   BarChart,
   Heart,
+  Menu,
+  X,
 } from "lucide-react"
 
-export default function HomePage({ onStartAssessment }: { onStartAssessment: () => void }) {
+export default function HomePage({ onNavigate }: { onNavigate: (page: string) => void }) {
   const { t } = useLanguage()
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
   return (
     <div className="min-h-screen">
@@ -47,18 +51,61 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
 
           <div className="flex items-center gap-3">
             <LanguageSelector />
-            <Link href="/auth/login">
+            <Link href="/auth/login" className="hidden md:inline-block">
               <Button variant="ghost" size="sm">
                 {t("nav_sign_in")}
               </Button>
             </Link>
-            <Link href="/auth/sign-up">
+            <Link href="/auth/sign-up" className="hidden md:inline-block">
               <Button size="sm" className="rounded-full">
                 {t("nav_get_started")}
               </Button>
             </Link>
+            <Button variant="ghost" size="sm" className="md:hidden" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
           </div>
         </div>
+
+        {mobileMenuOpen && (
+          <div className="md:hidden bg-background border-t border-border/50">
+            <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-4">
+              <a
+                href="#features"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("nav_features")}
+              </a>
+              <a
+                href="#how-it-works"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("nav_how_it_works")}
+              </a>
+              <a
+                href="#testimonials"
+                className="text-sm text-muted-foreground hover:text-foreground transition-colors py-2"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                {t("nav_testimonials")}
+              </a>
+              <div className="flex flex-col gap-2 pt-2 border-t border-border/50">
+                <Link href="/auth/login">
+                  <Button variant="ghost" size="sm" className="w-full">
+                    {t("nav_sign_in")}
+                  </Button>
+                </Link>
+                <Link href="/auth/sign-up">
+                  <Button size="sm" className="w-full rounded-full">
+                    {t("nav_get_started")}
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </div>
+        )}
       </nav>
 
       <section className="relative overflow-hidden px-4 py-20 md:py-32">
@@ -80,7 +127,7 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Button
-              onClick={onStartAssessment}
+              onClick={() => onNavigate("assessment")}
               size="lg"
               className="px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-shadow"
             >
@@ -265,7 +312,7 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
           </div>
 
           <div className="text-center mt-12">
-            <Button onClick={onStartAssessment} size="lg" className="px-8 py-6 text-lg rounded-full">
+            <Button onClick={() => onNavigate("assessment")} size="lg" className="px-8 py-6 text-lg rounded-full">
               {t("hero_cta_primary")}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
@@ -353,7 +400,11 @@ export default function HomePage({ onStartAssessment }: { onStartAssessment: () 
           <p className="text-xl text-muted-foreground mb-12 text-pretty">{t("cta_subtitle")}</p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <Button onClick={onStartAssessment} size="lg" className="px-8 py-6 text-lg rounded-full shadow-lg">
+            <Button
+              onClick={() => onNavigate("assessment")}
+              size="lg"
+              className="px-8 py-6 text-lg rounded-full shadow-lg"
+            >
               {t("hero_cta_primary")}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
