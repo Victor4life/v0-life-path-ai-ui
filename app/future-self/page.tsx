@@ -1,20 +1,32 @@
 "use client"
 import { Button } from "@/components/ui/button"
+import type React from "react"
+
 import { Card } from "@/components/ui/card"
 import { Textarea } from "@/components/ui/textarea"
 import { Send, Sparkles, Brain, Heart, Target } from "lucide-react"
-import { useChat } from "@ai-sdk/react"
 import { useState } from "react"
 import { useLanguage } from "@/lib/language-context"
 
+type Message = {
+  id: string
+  role: "user" | "assistant"
+  content: string
+}
+
+const mockResponses = [
+  "I'm so proud of you for taking this step today. A year from now, you'll look back and see this moment as the turning point. The challenges you're facing? They're shaping you into someone stronger, wiser, and more resilient.",
+  "You know what's amazing? The fact that you're here, asking these questions, shows how far you've already come. Trust the process. The seeds you plant today will bloom in ways you can't even imagine yet.",
+  "Let me tell you something - that goal you're hesitant about? Go for it. I've seen how capable you are. The version of you one year ahead is living proof that you can do hard things and come out thriving.",
+  "The struggles you're facing right now are temporary, but the lessons you're learning are permanent. Keep going. Future you is grateful for your persistence today.",
+  "I wish I could tell you it gets easier, but the truth is - you get stronger. And that's so much better. Keep showing up for yourself, even on the hard days.",
+]
+
 export default function FutureSelfPage() {
   const { t, language } = useLanguage()
-  const { messages, input, handleInputChange, handleSubmit, isLoading, setInput } = useChat({
-    api: "/api/future-self",
-    body: {
-      language,
-    },
-  })
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState("")
+  const [isLoading, setIsLoading] = useState(false)
   const [selectedPrompt, setSelectedPrompt] = useState<string | null>(null)
 
   const starterPrompts = [
@@ -43,6 +55,34 @@ export default function FutureSelfPage() {
   const handlePromptSelect = (prompt: string) => {
     setInput(prompt)
     setSelectedPrompt(prompt)
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!input.trim() || isLoading) return
+
+    const userMessage: Message = {
+      id: `user-${Date.now()}`,
+      role: "user",
+      content: input,
+    }
+
+    setMessages((prev) => [...prev, userMessage])
+    setInput("")
+    setIsLoading(true)
+
+    // Simulate API delay
+    await new Promise((resolve) => setTimeout(resolve, 1500))
+
+    const randomResponse = mockResponses[Math.floor(Math.random() * mockResponses.length)]
+    const assistantMessage: Message = {
+      id: `assistant-${Date.now()}`,
+      role: "assistant",
+      content: randomResponse,
+    }
+
+    setMessages((prev) => [...prev, assistantMessage])
+    setIsLoading(false)
   }
 
   return (
@@ -137,7 +177,7 @@ export default function FutureSelfPage() {
           <div className="flex-1 relative">
             <Textarea
               value={input}
-              onChange={handleInputChange}
+              onChange={(e) => setInput(e.target.value)}
               placeholder={t("future_self_placeholder")}
               className="rounded-2xl min-h-24 bg-white/80 backdrop-blur-sm border-purple-200 focus:border-purple-400 resize-none pr-4"
               disabled={isLoading}
