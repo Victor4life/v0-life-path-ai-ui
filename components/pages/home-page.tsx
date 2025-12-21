@@ -108,40 +108,76 @@ export default function HomePage({ onNavigate }: { onNavigate: (page: string) =>
         )}
       </nav>
 
-      <section className="relative overflow-hidden px-4 py-20 md:py-32">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-accent/5 -z-10" />
+      <section className="relative overflow-hidden px-4 py-24 md:py-40">
+        {/* Animated gradient background */}
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/10 via-secondary/10 to-accent/10 -z-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(168,85,247,0.15),transparent_50%)] -z-10" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_80%,rgba(251,146,60,0.15),transparent_50%)] -z-10" />
 
-        <div className="max-w-6xl mx-auto text-center">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-8">
-            <Sparkles className="w-4 h-4" />
-            {t("hero_badge")}
-          </div>
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center max-w-5xl mx-auto">
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-gradient-to-r from-primary/10 to-secondary/10 border border-primary/20 text-primary text-sm font-medium mb-8 backdrop-blur-sm">
+              <Sparkles className="w-4 h-4" />
+              {t("hero_badge")}
+            </div>
 
-          <h1 className="text-5xl md:text-7xl font-bold mb-6 text-balance leading-tight">
-            {t("hero_title_1")} <span className="text-primary">{t("hero_title_2")}</span>
-          </h1>
+            {/* Main heading with enhanced typography */}
+            <h1 className="text-6xl md:text-8xl font-bold mb-8 text-balance leading-[1.1] tracking-tight">
+              {t("hero_title_1")}{" "}
+              <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent animate-gradient">
+                {t("hero_title_2")}
+              </span>
+            </h1>
 
-          <p className="text-xl md:text-2xl text-muted-foreground mb-12 max-w-3xl mx-auto text-pretty leading-relaxed">
-            {t("hero_description")}
-          </p>
+            {/* Subtitle with better spacing */}
+            <p className="text-xl md:text-2xl text-muted-foreground/80 mb-12 max-w-3xl mx-auto text-pretty leading-relaxed font-light">
+              {t("hero_description")}
+            </p>
 
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              onClick={() => onNavigate("assessment")}
-              size="lg"
-              className="px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-shadow"
-            >
-              {t("hero_cta_primary")}
-              <ArrowRight className="ml-2 w-5 h-5" />
-            </Button>
-            <Link href="/dashboard">
-              <Button variant="outline" size="lg" className="px-8 py-6 text-lg rounded-full bg-transparent">
-                {t("hero_cta_secondary")}
+            {/* Enhanced CTA buttons */}
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
+              <Button
+                onClick={() => onNavigate("assessment")}
+                size="lg"
+                className="group px-10 py-7 text-lg rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-primary to-secondary hover:scale-105"
+              >
+                {t("hero_cta_primary")}
+                <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
-            </Link>
+              <Link href="/dashboard">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  className="px-10 py-7 text-lg rounded-full bg-background/50 backdrop-blur-sm border-2 hover:bg-background/80 transition-all duration-300"
+                >
+                  {t("hero_cta_secondary")}
+                </Button>
+              </Link>
+            </div>
+
+            {/* Social proof */}
+            <div className="flex items-center justify-center gap-8 text-sm text-muted-foreground flex-wrap">
+              <div className="flex items-center gap-2">
+                <div className="flex -space-x-2">
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-purple-400 to-pink-400 border-2 border-background" />
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-blue-400 to-cyan-400 border-2 border-background" />
+                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-orange-400 to-red-400 border-2 border-background" />
+                </div>
+                <span className="font-medium">10,000+ transformations</span>
+              </div>
+              <div className="flex items-center gap-1">
+                <span className="text-yellow-500">★★★★★</span>
+                <span className="ml-1 font-medium">4.9/5 rating</span>
+              </div>
+            </div>
+
+            <div className="mt-8 text-sm text-muted-foreground/60">{t("hero_disclaimer")}</div>
           </div>
 
-          <div className="mt-12 text-sm text-muted-foreground">{t("hero_disclaimer")}</div>
+          {/* Floating elements for visual interest */}
+          <div className="absolute top-20 left-10 w-20 h-20 rounded-full bg-primary/10 blur-3xl animate-pulse hidden lg:block" />
+          <div className="absolute bottom-20 right-10 w-32 h-32 rounded-full bg-secondary/10 blur-3xl animate-pulse delay-700 hidden lg:block" />
         </div>
       </section>
 

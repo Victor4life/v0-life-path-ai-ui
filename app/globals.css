@@ -140,6 +140,9 @@
   --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
   --color-sidebar-border: var(--sidebar-border);
   --color-sidebar-ring: var(--sidebar-ring);
+
+  /* Adding custom gradient animation keyframe */
+  --animate-gradient: gradient 8s ease infinite;
 }
 
 @layer base {
@@ -148,5 +151,33 @@
   }
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+/* Adding gradient animation for hero text */
+@keyframes gradient {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 8s ease infinite;
+}
+
+/* Adding smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced backdrop blur for navbar */
+@supports (backdrop-filter: blur(12px)) {
+  .backdrop-blur-md {
+    backdrop-filter: blur(12px) saturate(180%);
   }
 }
