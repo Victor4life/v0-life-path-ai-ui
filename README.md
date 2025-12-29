@@ -1,81 +1,30 @@
-# **LifePath AI**
+# LifePath AI UI
 
-LifePath AI is a digital life assessment and planning companion designed to help people gain clarity, direction, and momentum. It turns personal challenges into clear insights and transforms goals into a personalized 30-day action plan with daily guidance.
+*Automatically synced with your [v0.app](https://v0.app) deployments*
 
----
+[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/emekas-projects-1d1ca0f9/v0-life-path-ai-ui)
+[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/hXup3G9buPP)
 
-## 🚀 **Overview**
+## Overview
 
-Many people feel stuck but don’t know where to start. LifePath AI helps users reflect on their situation, understand what’s holding them back, and take consistent, achievable steps forward.
+This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
+Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
 
-The focus is on **clarity, simplicity, and action**.
+## Deployment
 
----
+Your project is live at:
 
-## ✨ **Key Features**
+**[https://vercel.com/emekas-projects-1d1ca0f9/v0-life-path-ai-ui](https://vercel.com/emekas-projects-1d1ca0f9/v0-life-path-ai-ui)**
 
-* Guided life assessment and reflection
-* Clear, supportive life diagnosis
-* Root cause and priority analysis
-* Personalized 30-day transformation plan
-* Daily micro-goals and actionable tasks
-* Motivation and reflection prompts
-* Optional voice input and PDF export
-* Optional progress tracking
+## Build your app
 
----
+Continue building your app on:
 
-## 🧠 **How It Works**
+**[https://v0.app/chat/hXup3G9buPP](https://v0.app/chat/hXup3G9buPP)**
 
-1. The user completes a short, structured life assessment
-2. The system analyzes challenges, goals, habits, and strengths
-3. A personalized 30-day plan is generated
-4. Daily guidance helps users stay consistent and motivated
+## How It Works
 
----
-
-## 🛠️ **Technologies Used**
-
-* JavaScript
-* TypeScript
-* React
-* Node.js
-* Serverless API routes
-* OpenAI API
-* JSON
-* Cloud hosting platform
-* Audio transcription (optional)
-* PDF generation (optional)
-
----
-
-## 🎯 **Why LifePath AI**
-
-* Focuses on real human problems
-* Turns confusion into clarity
-* Breaks big goals into small daily actions
-* Designed to feel supportive, not overwhelming
-* Built as a complete, end-to-end product
-
----
-
-## 📈 **Future Improvements**
-
-* Long-term planning beyond 30 days
-* Deeper personalization over time
-* Progress history and insights
-* Expanded language support
-* Mobile-first optimization
-* Community and accountability features
-
----
-
-## 📄 **License**
-
-This project is open for educational and hackathon use.
-
----
-
-## 🙌 **Acknowledgements**
-
-Built for the **Missing Amps Winter Classic Hackathon** with the goal of helping people move forward with confidence, clarity, and purpose.
+1. Create and modify your project using [v0.app](https://v0.app)
+2. Deploy your chats from the v0 interface
+3. Changes are automatically pushed to this repository
+4. Vercel deploys the latest version from this repository
