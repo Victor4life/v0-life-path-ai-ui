@@ -24,7 +24,7 @@ import {
   X,
 } from "lucide-react"
 
-export default function HomePage({ onNavigate }: { onNavigate: (page: string) => void }) {
+export default function HomePage({ onStartAssessment }: { onStartAssessment: () => void }) {
   const { t } = useLanguage()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 
@@ -138,7 +138,7 @@ export default function HomePage({ onNavigate }: { onNavigate: (page: string) =>
             {/* Enhanced CTA buttons */}
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
               <Button
-                onClick={() => onNavigate("assessment")}
+                onClick={onStartAssessment}
                 size="lg"
                 className="group px-10 py-7 text-lg rounded-full shadow-lg hover:shadow-2xl transition-all duration-300 bg-gradient-to-r from-primary to-secondary hover:scale-105"
               >
@@ -348,7 +348,7 @@ export default function HomePage({ onNavigate }: { onNavigate: (page: string) =>
           </div>
 
           <div className="text-center mt-12">
-            <Button onClick={() => onNavigate("assessment")} size="lg" className="px-8 py-6 text-lg rounded-full">
+            <Button onClick={onStartAssessment} size="lg" className="px-8 py-6 text-lg rounded-full">
               {t("hero_cta_primary")}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
@@ -436,11 +436,7 @@ export default function HomePage({ onNavigate }: { onNavigate: (page: string) =>
           <p className="text-xl text-muted-foreground mb-12 text-pretty">{t("cta_subtitle")}</p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-8">
-            <Button
-              onClick={() => onNavigate("assessment")}
-              size="lg"
-              className="px-8 py-6 text-lg rounded-full shadow-lg"
-            >
+            <Button onClick={onStartAssessment} size="lg" className="px-8 py-6 text-lg rounded-full shadow-lg">
               {t("hero_cta_primary")}
               <ArrowRight className="ml-2 w-5 h-5" />
             </Button>
