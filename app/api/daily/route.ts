@@ -53,6 +53,15 @@ Keep it concise, actionable, and uplifting. Focus on today only.`
     return Response.json(object)
   } catch (error) {
     console.error("[v0] Error in /api/daily:", error)
-    return Response.json({ error: "Failed to generate daily guidance" }, { status: 500 })
+    return new Response(
+      JSON.stringify({
+        error: "Failed to generate daily guidance",
+        details: error instanceof Error ? error.message : "Unknown error",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    )
   }
 }

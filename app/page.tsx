@@ -9,6 +9,7 @@ import CompanionPage from "@/components/pages/companion-page"
 import { LanguageSelector } from "@/components/language-selector"
 import { useLanguage } from "@/lib/language-context"
 import { useTheme } from "@/lib/theme-context"
+import { toast } from "react-toastify"
 
 export default function Page() {
   const [currentPage, setCurrentPage] = useState("home")
@@ -31,21 +32,24 @@ export default function Page() {
 
   const handleAssessmentSubmit = async (data: any) => {
     setAssessmentData(data)
+    toast.info("Processing your assessment...", { autoClose: 2000 })
 
     let transcription = ""
     if (data.voiceNote) {
-      const formData = new FormData()
-      formData.append("audio", data.voiceNote)
-
       try {
+        const formData = new FormData()
+        formData.append("audio", data.voiceNote)
+
         const response = await fetch("/api/transcribe", {
           method: "POST",
           body: formData,
         })
         const transcriptData = await response.json()
         transcription = transcriptData.transcription || ""
+        toast.success("Voice transcription completed", { autoClose: 2000 })
       } catch (error) {
         console.error("[v0] Transcription failed:", error)
+        toast.warning("Voice transcription skipped", { autoClose: 2000 })
       }
     }
 
@@ -59,15 +63,25 @@ export default function Page() {
           language,
         }),
       })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Failed to analyze")
+      }
+
       const analysisResults = await response.json()
+      toast.success("Analysis complete!", { autoClose: 2000 })
       handleNavigate("results", analysisResults)
     } catch (error) {
-      console.error("[v0] Analysis failed:", error)
+      const errorMessage = error instanceof Error ? error.message : "An error occurred"
+      toast.error(errorMessage, { autoClose: 4000 })
     }
   }
 
   const handleGeneratePlan = async () => {
     if (!resultsData) return
+
+    toast.info("Generating your personalized plan...", { autoClose: 2000 })
 
     try {
       const response = await fetch("/api/plan", {
@@ -80,10 +94,18 @@ export default function Page() {
           language,
         }),
       })
+
+      if (!response.ok) {
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Failed to generate plan")
+      }
+
       const planData = await response.json()
+      toast.success("Plan generated successfully!", { autoClose: 2000 })
       handleNavigate("plan", { ...resultsData, ...planData })
     } catch (error) {
-      console.error("[v0] Plan generation failed:", error)
+      const errorMessage = error instanceof Error ? error.message : "An error occurred"
+      toast.error(errorMessage, { autoClose: 4000 })
     }
   }
 
@@ -91,10 +113,11 @@ export default function Page() {
     setAssessmentData(null)
     setResultsData(null)
     setCurrentPage("home")
+    toast.info("Starting fresh", { autoClose: 2000 })
   }
 
   return (
-    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-purple-50 to-orange-50">
+    <main className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-100">
       {currentPage !== "home" && (
         <div className="fixed top-4 right-4 z-50">
           <LanguageSelector />

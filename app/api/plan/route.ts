@@ -90,6 +90,15 @@ Make the plan realistic, encouraging, and grounded in small, sustainable changes
     return Response.json(object)
   } catch (error) {
     console.error("[v0] Error in /api/plan:", error)
-    return Response.json({ error: "Failed to generate plan" }, { status: 500 })
+    return new Response(
+      JSON.stringify({
+        error: "Failed to generate plan",
+        details: error instanceof Error ? error.message : "Unknown error",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    )
   }
 }

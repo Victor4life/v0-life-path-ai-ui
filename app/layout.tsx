@@ -4,14 +4,15 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { LanguageProvider } from "@/lib/language-context"
 import { ThemeProvider } from "@/lib/theme-context"
+import { ToastProvider } from "@/lib/toast-provider"
 import "./globals.css"
 
 const _geist = Geist({ subsets: ["latin"] })
 const _geistMono = Geist_Mono({ subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "LifePath AI - Personalized 30-Day Transformation",
-  description: "AI-powered life assessment and personalized transformation plan",
+  title: "LifePath AI - Professional Life Transformation",
+  description: "AI-powered personalized life assessment and 30-day transformation planning",
   generator: "v0.app",
   icons: {
     icon: [
@@ -40,9 +41,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-sans antialiased`}>
-        <LanguageProvider>
-          <ThemeProvider>{children}</ThemeProvider>
-        </LanguageProvider>
+        <ToastProvider>
+          <LanguageProvider>
+            <ThemeProvider>{children}</ThemeProvider>
+          </LanguageProvider>
+        </ToastProvider>
         <Analytics />
       </body>
     </html>

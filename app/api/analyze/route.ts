@@ -75,6 +75,15 @@ Be encouraging, supportive, and realistic. Focus on their potential for growth.`
     return Response.json(object)
   } catch (error) {
     console.error("[v0] Error in /api/analyze:", error)
-    return Response.json({ error: "Failed to generate analysis" }, { status: 500 })
+    return new Response(
+      JSON.stringify({
+        error: "Failed to generate analysis",
+        details: error instanceof Error ? error.message : "Unknown error",
+      }),
+      {
+        status: 500,
+        headers: { "Content-Type": "application/json" },
+      },
+    )
   }
 }
